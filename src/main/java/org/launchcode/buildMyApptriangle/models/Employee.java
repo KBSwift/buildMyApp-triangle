@@ -13,6 +13,7 @@ public class Employee {
     private boolean availability;
 
 //import address for site form Customer
+    private String customerAddress;
 
     public int getId() {
         return id;
@@ -50,18 +51,24 @@ public class Employee {
         return availability;
     }
 
-
-
     public void setAvailability(boolean availability) {
         this.availability = availability;
     }
 
-    public Employee(int id, String name, String email, String phoneNum, boolean availability) {
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
+    public Employee(int id, String name, String email, String phoneNum, boolean availability, String customerAddress) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNum = phoneNum;
         this.availability = availability;
+        this.customerAddress = customerAddress;
     }
-
 }
