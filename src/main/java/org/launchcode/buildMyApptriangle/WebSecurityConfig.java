@@ -17,7 +17,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/Index").permitAll()
+                        //TODO: currently configured to allow any user on any page for ease of access while creating site. Remove and reconfigure before release!
+                        // .requestMatchers("/", "/Index")
+                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
