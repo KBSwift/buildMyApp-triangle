@@ -1,52 +1,39 @@
 package org.launchcode.buildMyApptriangle.models;
 
-public class Contract {
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-    private int id;
+public class Contract extends AbstractEntity {
 
-    private boolean completion;
+    @NotNull
+    @Size(min =1, max =255)
+    private String jobDescription;
 
-    //import name from Employee
-    private String employeeName;
+    @ManyToOne
+    @JoinColumn(name ="emplyee_id")
+    private Employee employee;
 
-    //import address from Customer
-    private String workSite;
-
-    public int getId() {
-        return id;
+    public Contract(String jobDescription){
+        this.jobDescription = jobDescription;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Contract(){}
+
+    public String getJobDescription(){
+        return jobDescription;
     }
 
-    public boolean isCompletion() {
-        return completion;
+    public void setJobDescription(String jobDescription){
+        this.jobDescription=jobDescription;
     }
 
-    public void setCompletion(boolean completion) {
-        this.completion = completion;
-    }
-    public String getEmployeeName() {
-        return employeeName;
+    public Employee getEmployee(){
+        return employee;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
-    }
-
-    public String getWorkSite() {
-        return workSite;
-    }
-
-    public void setWorkSite(String workSite) {
-        this.workSite = workSite;
-    }
-
-    public Contract(int id, boolean completion, String employeeName, String workSite) {
-        this.id = id;
-        this.completion = completion;
-        this.employeeName = employeeName;
-        this.workSite = workSite;
+    public void setEmployee(Employee employee){
+        this.employee= employee;
     }
 }

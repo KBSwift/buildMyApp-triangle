@@ -1,74 +1,45 @@
 package org.launchcode.buildMyApptriangle.models;
 
-public class Employee {
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-    private int id;
+import java.util.ArrayList;
+import java.util.List;
 
-    private String name;
+public class Employee extends AbstractEntity {
 
+    @NotNull
     private String email;
 
+    @NotNull
+    @Size(min=1,max=10)
     private String phoneNum;
 
     private boolean availability;
 
-//import address for site form Customer
-    private String customerAddress;
+    @OneToMany
+    @JoinColumn(name="employee_id")
+    private final List<Contract> contract = new ArrayList<>();
 
-    public int getId() {
-        return id;
+    public Employee(String email, String phoneNum, boolean availability) {
+        this.email = email;
+        this.phoneNum = phoneNum;
+        this.availability = availability;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public Employee(){}
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
     public boolean isAvailability() {
         return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
-    }
-
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
-    }
-
-    public Employee(int id, String name, String email, String phoneNum, boolean availability, String customerAddress) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.availability = availability;
-        this.customerAddress = customerAddress;
     }
 }
