@@ -1,31 +1,39 @@
 package org.launchcode.buildMyApptriangle.models;
 
-public class Contract {
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-    private int id;
+public class Contract extends AbstractEntity {
 
-    private boolean completion;
+    @NotNull
+    @Size(min =1, max =255)
+    private String jobDescription;
 
-    //import name from Employee
+    @ManyToOne
+    @JoinColumn(name ="emplyee_id")
+    private Employee employee;
 
-    //import address from Customer
-    public int getId() {
-        return id;
+    public Contract(String jobDescription){
+        this.jobDescription = jobDescription;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Contract(){}
+
+    public String getJobDescription(){
+        return jobDescription;
     }
 
-    public boolean isCompletion() {
-        return completion;
+    public void setJobDescription(String jobDescription){
+        this.jobDescription=jobDescription;
     }
 
-    public void setCompletion(boolean completion) {
-        this.completion = completion;
+    public Employee getEmployee(){
+        return employee;
     }
 
-
-
-
+    public void setEmployee(Employee employee){
+        this.employee= employee;
+    }
 }
