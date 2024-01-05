@@ -12,4 +12,16 @@ public class ContractController {
     public String index() {
         return "contracts/index";
     }
+
+    @GetMapping("Add")
+    public String displayAddContractForm() {
+        return "contracts/add";
+    }
+
+    @GetMapping("Delete")
+    public String displayDeleteContractForm() {
+        return "contracts/delete";
+    }
+
+//    @GetMapping("view/{contractId}")
 }

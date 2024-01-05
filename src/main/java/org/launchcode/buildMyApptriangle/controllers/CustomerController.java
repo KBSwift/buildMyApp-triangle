@@ -12,4 +12,16 @@ public class CustomerController {
     public String index() {
         return "customers/index";
     }
+
+    @GetMapping("Add")
+    public String displayAddCustomerForm() {
+        return "customers/add";
+    }
+
+    @GetMapping("Delete")
+    public String displayDeleteCustomerForm() {
+        return "customers/delete";
+    }
+
+//    @GetMapping("view/{customerId}")
 }

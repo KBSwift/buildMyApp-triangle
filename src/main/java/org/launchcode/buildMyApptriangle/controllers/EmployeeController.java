@@ -12,4 +12,16 @@ public class EmployeeController {
     public String index() {
         return "employees/index";
     }
+
+    @GetMapping("Add")
+    public String displayAddEmployeeForm() {
+        return "employees/add";
+    }
+
+    @GetMapping("Delete")
+    public String displayDeleteEmployeeForm() {
+        return "employees/delete";
+    }
+
+//    @GetMapping("view/{employeeId}")
 }
