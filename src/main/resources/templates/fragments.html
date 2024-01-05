@@ -4,5 +4,15 @@
     <meta charset="UTF-8">
     <title>Fragments</title>
 </head>
-
+<div class="navbar" th:fragment="navbar">
+    <a th:href="@{/}">Index</a>
+    <a th:href="@{/Contracts/}">Contracts</a>
+    <a th:href="@{/Customers/}">Customers</a>
+    <a th:href="@{/Employees/}">Employees</a>
+</div>
+<div class="logout" th:fragment="logout">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
 </html>

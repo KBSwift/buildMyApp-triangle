@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Contract Index</title>
 </head>
 <body>
     <main>
+        <div th:replace="fragments :: navbar"></div>
+        <div th:replace="fragments :: logout"></div>
         Contract Index Page!
     </main>
 </body>

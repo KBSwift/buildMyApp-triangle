@@ -5,10 +5,10 @@
     <title>Main Index</title>
 </head>
 <body>
-<main>
-    <div>
-        <p>Test App! Click <a th:href="@{/Greeting}">here!</a></p>
-    </div>
-</main>
+    <main>
+        <div th:replace="fragments :: navbar"></div>
+        <div th:replace="fragments :: logout"></div>
+        <p>Main Page!</p>
+    </main>
 </body>
 </html>

@@ -18,8 +18,8 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         //TODO: currently configured to allow any user on any page for ease of access while creating site. Remove and reconfigure before release!
-                        // .requestMatchers("/", "/Index")
-                        .requestMatchers("/**").permitAll()
+                         .requestMatchers("/").permitAll()
+//                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
