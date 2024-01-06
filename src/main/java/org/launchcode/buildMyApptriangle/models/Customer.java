@@ -1,8 +1,16 @@
 package org.launchcode.buildMyApptriangle.models;
 
-public class Customer {
+import jakarta.persistence.*;
 
+import java.util.List;
+
+//Adding Spring Notation according to database
+@Entity
+public class Customer {
+    @Id
+    @GeneratedValue
     private int customerId;
+
 
     private String customerName;
 
@@ -11,6 +19,9 @@ public class Customer {
     private String customerPhoneNumber;
 
     private String address;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Contract> contracts;
 
     public int getCustomerId() {
         return customerId;

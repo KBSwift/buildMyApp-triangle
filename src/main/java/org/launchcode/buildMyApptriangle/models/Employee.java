@@ -1,7 +1,13 @@
 package org.launchcode.buildMyApptriangle.models;
 
-public class Employee {
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
+public class Employee {
+    @Id
+    @GeneratedValue
     private int id;
 
     private String name;
@@ -11,6 +17,9 @@ public class Employee {
     private String phoneNum;
 
     private boolean availability;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Contract> contracts;
 
 //import address for site form Customer
 
