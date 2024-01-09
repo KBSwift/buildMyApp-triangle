@@ -26,9 +26,11 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         //TODO: currently configured to allow any user on any page for ease of access while creating site. Remove and reconfigure before release!
 //                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/**").permitAll()
-                        .anyRequest().authenticated()
+                                .requestMatchers("/**").permitAll()
+                                .anyRequest().anonymous()
+
                 )
+                .csrf((csrf -> csrf.disable()))
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
@@ -37,15 +39,4 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder() //Should change later. Only fine for Demo.
-//                        .username("Eric")
-//                        .password("password")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 }

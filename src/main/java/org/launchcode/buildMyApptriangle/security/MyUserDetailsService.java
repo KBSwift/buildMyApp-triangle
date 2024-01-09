@@ -19,4 +19,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not present"));
                 return user;
     }
+    public void createUser(UserDetails user) {
+        userRepository.save((User) user);
+    }
 }
