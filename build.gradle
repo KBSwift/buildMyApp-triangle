@@ -24,7 +24,7 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.32'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation("org.jmockit:jmockit:1.49")
-
+	implementation 'org.simplejavamail:spring-module:8.5.1'
 }
 
 tasks.named('test') {
