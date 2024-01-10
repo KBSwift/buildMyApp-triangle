@@ -4,6 +4,7 @@ import org.launchcode.buildMyApptriangle.models.User;
 import org.launchcode.buildMyApptriangle.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,15 @@ public class RegisterController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
             MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }
     )
-    public void addUser(@RequestParam Map<String, String> body) {
+    public String addUser(@RequestParam Map<String, String> body) {
         User user = new User(); user.setUsername(body.get("username"));
         user.setPassword(passwordEncoder.encode(body.get("password")));
-        userDetailsService.createUser(user);
+        try {
+            userDetailsService.loadUserByUsername(user.getUsername());
+        }   catch (Exception UsernameNotFoundException) {
+            userDetailsService.createUser(user);
+            return "redirect:/login";
+        }
+        return "register";
     }
 }
