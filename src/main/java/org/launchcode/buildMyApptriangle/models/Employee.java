@@ -1,5 +1,6 @@
 package org.launchcode.buildMyApptriangle.models;
 
+
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +9,18 @@ import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee extends AbstractEntity {
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+public class Employee extends AbstractEntity  {
+    @Id
+    @GeneratedValue
+    private int id;
+
+
+
 
     @NotNull
     private String email;
@@ -19,9 +31,10 @@ public class Employee extends AbstractEntity {
 
     private boolean availability;
 
-    @OneToMany
-    @JoinColumn(name="employee_id")
-    private final List<Contract> contract = new ArrayList<>();
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Contract> contracts;
+
+//import address for site form Customer
 
     public Employee(String email, String phoneNum, boolean availability) {
         this.email = email;
