@@ -1,12 +1,20 @@
 package org.launchcode.buildMyApptriangle.models;
 
+
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import java.util.List;
+
+
 import jakarta.persistence.*;
 
 import java.util.List;
 
 //Adding Spring Notation according to database
 @Entity
-public class Customer {
+public class Customer extends AbstractEntity {
     @Id
     @GeneratedValue
     private int customerId;
@@ -14,9 +22,15 @@ public class Customer {
 
     private String customerName;
 
+
+    @NotNull
     private String customerEmail;
 
+    @NotNull
+    @Size(min =1,max = 10)
     private String customerPhoneNumber;
+
+
 
     private String address;
 
@@ -37,7 +51,7 @@ public class Customer {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-    }
+
 
     public String getCustomerEmail() {
         return customerEmail;
@@ -54,20 +68,11 @@ public class Customer {
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
-
-    public String getAddress() {
-        return address;
+    public List<Contract> getContractList(){
+        return contractList;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Customer(int customerId, String customerName, String customerEmail, String customerPhoneNumber, String address) {
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.customerEmail = customerEmail;
-        this.customerPhoneNumber = customerPhoneNumber;
-        this.address = address;
+    public void setContractList(List<Contract> contractList){
+        this.contractList=contractList;
     }
 }

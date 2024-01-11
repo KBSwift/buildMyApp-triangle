@@ -1,19 +1,32 @@
 package org.launchcode.buildMyApptriangle.models;
 
+
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-public class Employee {
+public class Employee extends AbstractEntity  {
     @Id
     @GeneratedValue
     private int id;
 
-    private String name;
 
+
+
+    @NotNull
     private String email;
 
+    @NotNull
+    @Size(min=1,max=10)
     private String phoneNum;
 
     private boolean availability;
@@ -23,54 +36,23 @@ public class Employee {
 
 //import address for site form Customer
 
-    public int getId() {
-        return id;
+    public Employee(String email, String phoneNum, boolean availability) {
+        this.email = email;
+        this.phoneNum = phoneNum;
+        this.availability = availability;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public Employee(){}
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
     public boolean isAvailability() {
         return availability;
     }
-
-
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
-    }
-
-    public Employee(int id, String name, String email, String phoneNum, boolean availability) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.availability = availability;
-    }
-
 }
