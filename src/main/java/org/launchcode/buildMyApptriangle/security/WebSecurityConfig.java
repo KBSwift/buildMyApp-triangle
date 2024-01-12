@@ -40,7 +40,7 @@ public class WebSecurityConfig {
         return http.build();
     }
     @Bean
-    @Order(3)
+    @Order(1)
     public SecurityFilterChain registerChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/register")
@@ -59,6 +59,22 @@ public class WebSecurityConfig {
                 .securityMatcher("/contracts/", "/customers/", "/employees/")
                 .authorizeHttpRequests((authorize) -> authorize
                                 .requestMatchers("/**").authenticated()
+                )
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout((logout) -> logout.permitAll());
+
+        return http.build();
+    }
+    @Bean
+    @Order(3)
+    public SecurityFilterChain adminAuthenticationChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/contracts/**", "/customers/**", "/employees/**")
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/**").hasRole("ADMIN")
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
