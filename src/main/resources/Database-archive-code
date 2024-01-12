@@ -1,0 +1,4 @@
+Insert Into contacts_latest
+Select  *from contracts where jobs_done =1
+
+rename table contracts To contracts_archive_Date, contracts latest to contracts
