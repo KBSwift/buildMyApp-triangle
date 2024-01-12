@@ -25,8 +25,8 @@ public class Mail {
     }
 
     private void sendEmail() throws NoSuchMessageException, MessagingException {
-        String fromUser=null;
-        String fromUserPassword=null;
+        String fromUser="test.gmail";
+        String fromUserPassword="********";
         String emailHost="smtp.gmail.com";
         Transport transport= newSession.getTransport("smtp");
         transport.connect(emailHost,fromUser,fromUserPassword);
