@@ -25,8 +25,8 @@ public class Mail {
     }
 
     private void sendEmail() throws NoSuchMessageException, MessagingException {
-        String fromUser="pqr@gmail.com";
-        String fromUserPassword="******";
+        String fromUser=null;
+        String fromUserPassword=null;
         String emailHost="smtp.gmail.com";
         Transport transport= newSession.getTransport("smtp");
         transport.connect(emailHost,fromUser,fromUserPassword);
@@ -58,7 +58,7 @@ public class Mail {
         //set up amil API for smtp settings
 
         Properties properties=System.getProperties();
-        properties.put("mail.smtp.port","547");
+        properties.put("mail.smtp.port","465");
         properties.put("mail.smtp.auth","true");
         properties.put("mail.smtp.starttls.enable","true");
         newSession =Session.getDefaultInstance(properties,null);
