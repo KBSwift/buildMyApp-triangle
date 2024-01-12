@@ -1,10 +1,15 @@
 package org.launchcode.buildMyApptriangle.models;
 
-import com.sun.jdi.connect.Transport;
 import org.springframework.context.NoSuchMessageException;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.nio.channels.UnresolvedAddressException;
 import java.util.Properties;
 
@@ -12,17 +17,17 @@ public class Mail {
 
   Session newSession =null;
     MimeMessage mimeMessage=null;
-    public static void main(String args[]) throws UnresolvedAddressException, NoSuchMessageException {
+    public static void main(String args[]) throws UnresolvedAddressException, NoSuchMessageException, MessagingException {
         Mail mail = new Mail();
         mail.setupServerProperties();
         mail.draftEmail();
         mail.sendEmail();
     }
 
-    private void sendEmail() throws NoSuchMessageException{
-        String fromUser;
-        String fromUserPassword;
-        String emailHost;
+    private void sendEmail() throws NoSuchMessageException, MessagingException {
+        String fromUser="pqr@gmail.com";
+        String fromUserPassword="******";
+        String emailHost="smtp.gmail.com";
         Transport transport= newSession.getTransport("smtp");
         transport.connect(emailHost,fromUser,fromUserPassword);
         transport.sendMessage(mimeMessage,mimeMessage.getAllRecipients());
@@ -30,15 +35,16 @@ public class Mail {
         System.out.println("Email Sent.");
     }
 
-    private MimeMessage draftEmail() throws UnresolvedAddressException, NoSuchMessageException{
-        String[] emailRecipients={};
-        String emailSubject;
-        String emailBody;
+    @SuppressWarnings("SuspiciousIndentAfterControlStatement")
+    private MimeMessage draftEmail() throws UnresolvedAddressException, NoSuchMessageException, MessagingException {
+        String[] emailRecipients={"abc@gmail.com","xyz@gmail.com"};
+        String emailSubject="test mail";
+        String emailBody="test body of email";
         mimeMessage =new MimeMessage(newSession);
 
         for(int i=0; i<emailRecipients.length;i++)
-            mimeMessage.addrecipient(Message.RecipientType.TO, new InternetAddress(emailRecipients[i]));
-        mimeMessage.setSubject(emailSubject);
+            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRecipients[i]));
+            mimeMessage.setSubject(emailSubject);
 
 
         MimeBodyPart bodyPart = new MimeBodyPart();
@@ -52,10 +58,9 @@ public class Mail {
         //set up amil API for smtp settings
 
         Properties properties=System.getProperties();
-        properties.put("","");
-        properties.put("","");
-        properties.put("","");
-        properties.put("","");
+        properties.put("mail.smtp.port","547");
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
         newSession =Session.getDefaultInstance(properties,null);
     }
 
