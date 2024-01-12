@@ -1,4 +1,3 @@
-/*
 package org.launchcode.buildMyApptriangle.models;
 
 import com.sun.jdi.connect.Transport;
@@ -11,7 +10,7 @@ import java.util.Properties;
 
 public class Mail {
 
- * Session newSession =null;
+  Session newSession =null;
     MimeMessage mimeMessage=null;
     public static void main(String args[]) throws UnresolvedAddressException, NoSuchMessageException {
         Mail mail = new Mail();
@@ -61,4 +60,3 @@ public class Mail {
     }
 
 }
-*/

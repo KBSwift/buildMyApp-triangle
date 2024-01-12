@@ -1,0 +1,34 @@
+Use for creating database tables
+
+
+create table contracts(
+contract_id int,
+job_done boolean,
+site_adress varchar(255),
+employee_name varchar(255)
+)
+create table customer(
+customer_id int,
+first_name varchar(255),
+last_name varchar(255),
+adress varchar(255),
+address varchar(255),
+phone_numer varchar(255),
+)
+create table employee(
+availability boolean,
+site_adress varchar(255),
+employee_id int,
+first_name varchar(255),
+last_name varchar(255),
+phone_numer varchar(255),
+)
+
+use these to set the primary and foreign keys for the tables
+
+alter table customers
+add primary key (email)
+
+alter table employee
+add foreign key (email) references customers(email);
+
