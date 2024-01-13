@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("Contracts")
+@RequestMapping("contracts")
 public class ContractController {
 
     @GetMapping("/")
@@ -13,12 +13,12 @@ public class ContractController {
         return "contracts/index";
     }
 
-    @GetMapping("Add")
+    @GetMapping("add")
     public String displayAddContractForm() {
         return "contracts/add";
     }
 
-    @GetMapping("Delete")
+    @GetMapping("delete")
     public String displayDeleteContractForm() {
         return "contracts/delete";
     }

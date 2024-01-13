@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("Customers")
+@RequestMapping("customers")
 public class CustomerController {
 
     @GetMapping("/")
@@ -13,12 +13,12 @@ public class CustomerController {
         return "customers/index";
     }
 
-    @GetMapping("Add")
+    @GetMapping("add")
     public String displayAddCustomerForm() {
         return "customers/add";
     }
 
-    @GetMapping("Delete")
+    @GetMapping("delete")
     public String displayDeleteCustomerForm() {
         return "customers/delete";
     }

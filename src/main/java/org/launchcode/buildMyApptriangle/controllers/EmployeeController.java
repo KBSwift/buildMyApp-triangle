@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("Employees")
+@RequestMapping("employees")
 public class EmployeeController {
 
     @GetMapping("/")
@@ -13,12 +13,12 @@ public class EmployeeController {
         return "employees/index";
     }
 
-    @GetMapping("Add")
+    @GetMapping("add")
     public String displayAddEmployeeForm() {
         return "employees/add";
     }
 
-    @GetMapping("Delete")
+    @GetMapping("delete")
     public String displayDeleteEmployeeForm() {
         return "employees/delete";
     }
