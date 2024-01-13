@@ -12,8 +12,10 @@ public class Role {
     private Long id;
 
     private String name;
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    @ManyToMany(mappedBy = "employeeRoles")
+    private Collection<Employee> employees;
+    @ManyToMany(mappedBy = "customerRoles")
+    private Collection<Customer> customers;
 
     @ManyToMany
     @JoinTable(
@@ -48,12 +50,20 @@ public class Role {
         this.name = name;
     }
 
-    public Collection<User> getUsers() {
-        return users;
+    public Collection<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setEmployees(Collection<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public Collection<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Collection<Customer> customers) {
+        this.customers = customers;
     }
 
     public Collection<Privilege> getPrivileges() {

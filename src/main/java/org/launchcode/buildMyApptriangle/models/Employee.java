@@ -1,58 +1,51 @@
 package org.launchcode.buildMyApptriangle.models;
 
-
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Employee extends AbstractEntity  {
+public class Employee extends AbstractUser{
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToMany
+    @JoinTable(
+            name = "employees_roles",
+            joinColumns = @JoinColumn(
+                    name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name= "role_id", referencedColumnName = "id"))
+    private Collection<Role> employeeRoles;
 
 
-
-
-    @NotNull
-    private String email;
-
-    @NotNull
-    @Size(min=1,max=10)
-    private String phoneNum;
-
-    private boolean availability;
-
+    //TODO: Would this be ManyToMany? Multiple employees might work on the same job.
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Contract> contracts;
 
-//import address for site form Customer
+    public Employee() {
 
-    public Employee(String email, String phoneNum, boolean availability) {
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.availability = availability;
     }
 
-    public Employee(){}
-
-    public String getEmail() {
-        return email;
+    public Employee( String username, String password, String firstName, String lastName, Collection<Role> employeeRoles) {
+        super(username, password, firstName, lastName);
+        this.employeeRoles = employeeRoles;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public Long getId() {
+        return id;
     }
 
-    public boolean isAvailability() {
-        return availability;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Collection<Role> getEmployeeRoles() {
+        return employeeRoles;
+    }
+
+    public void setEmployeeRoles(Collection<Role> employeeRoles) {
+        this.employeeRoles = employeeRoles;
     }
 }
