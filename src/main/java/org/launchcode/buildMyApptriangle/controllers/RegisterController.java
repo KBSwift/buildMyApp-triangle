@@ -1,12 +1,12 @@
 package org.launchcode.buildMyApptriangle.controllers;
 
 import jakarta.validation.Valid;
-import org.launchcode.buildMyApptriangle.models.User;
+import org.launchcode.buildMyApptriangle.models.Customer;
+import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.data.RoleRepository;
 import org.launchcode.buildMyApptriangle.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.Map;
 
 @Controller
 public class RegisterController {
@@ -27,7 +26,7 @@ public class RegisterController {
 
     @GetMapping("register")
     public String registerCustomer(Model model) {
-        model.addAttribute(new User());
+        model.addAttribute(new Customer());
         return "register";
     }
 
@@ -37,18 +36,18 @@ public class RegisterController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
             MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }
     )
-    public String addCustomer(@ModelAttribute @Valid User newUser,
+    public String addCustomer(@ModelAttribute @Valid Customer newCustomer,
                           Errors errors, Model model) {
-        newUser.setRoles(Arrays.asList(roleRepository.findByName("ROLE_CUSTOMER")));
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newCustomer.setCustomerRoles(Arrays.asList(roleRepository.findByName("ROLE_CUSTOMER")));
+        newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
         if (errors.hasErrors()) {
             return "register";
         }
 
         try {
-            userDetailsService.loadUserByUsername(newUser.getUsername());
+            userDetailsService.loadUserByUsername(newCustomer.getUsername());
         }   catch (Exception UsernameNotFoundException) {
-            userDetailsService.createUser(newUser);
+            userDetailsService.createCustomer(newCustomer);
             return "redirect:/login";
         }
         return "register";
@@ -56,7 +55,7 @@ public class RegisterController {
 
     @GetMapping("register/employee")
     public String registerEmployee(Model model) {
-        model.addAttribute(new User());
+        model.addAttribute(new Employee());
         return "register";
     }
 
@@ -66,18 +65,18 @@ public class RegisterController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
             MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }
     )
-    public String addEmployee(@ModelAttribute @Valid User newUser,
+    public String addEmployee(@ModelAttribute @Valid Employee newEmployee,
                           Errors errors, Model model) {
-        newUser.setRoles(Arrays.asList(roleRepository.findByName("ROLE_EMPLOYEE")));
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newEmployee.setEmployeeRoles(Arrays.asList(roleRepository.findByName("ROLE_EMPLOYEE")));
+        newEmployee.setPassword(passwordEncoder.encode(newEmployee.getPassword()));
         if (errors.hasErrors()) {
             return "register";
         }
 
         try {
-            userDetailsService.loadUserByUsername(newUser.getUsername());
+            userDetailsService.loadUserByUsername(newEmployee.getUsername());
         }   catch (Exception UsernameNotFoundException) {
-            userDetailsService.createUser(newUser);
+            userDetailsService.createEmployee(newEmployee);
             return "redirect:/login";
         }
         return "register";

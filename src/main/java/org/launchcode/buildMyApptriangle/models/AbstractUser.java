@@ -2,51 +2,56 @@ package org.launchcode.buildMyApptriangle.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-@Entity
-@Table(name = "users")
-public class User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@MappedSuperclass
+public abstract class AbstractUser implements UserDetails {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long id;
+
     @Email
+    @NotNull
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
-
-    public User() {
+    public AbstractUser() {
 
     }
 
-    public User(String username, String password, String firstName, String lastName) {
+    public AbstractUser(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
+    //Getters and Setters
+//    public Collection<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Collection<Role> roles) {
+//        this.roles = roles;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

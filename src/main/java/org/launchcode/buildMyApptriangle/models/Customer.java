@@ -1,78 +1,50 @@
 package org.launchcode.buildMyApptriangle.models;
 
-
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
-import java.util.List;
-
-
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
-//Adding Spring Notation according to database
 @Entity
-public class Customer extends AbstractEntity {
+public class Customer extends AbstractUser{
     @Id
-    @GeneratedValue
-    private int customerId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-
-    private String customerName;
-
-
-    @NotNull
-    private String customerEmail;
-
-    @NotNull
-    @Size(min =1,max = 10)
-    private String customerPhoneNumber;
-
-
-
-    private String address;
+    @ManyToMany
+    @JoinTable(
+            name = "customers_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name= "role_id", referencedColumnName = "id"))
+    private Collection<Role> customerRoles;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Contract> contracts;
 
-    public int getCustomerId() {
-        return customerId;
+    public Customer() {
+
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public Customer(String username, String password, String firstName, String lastName, Collection<Role> customerRoles) {
+        super(username, password, firstName, lastName);
+        this.customerRoles = customerRoles;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public Long getId() {
+        return id;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-
-
-    public String getCustomerEmail() {
-        return customerEmail;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public Collection<Role> getCustomerRoles() {
+        return customerRoles;
     }
 
-    public String getCustomerPhoneNumber() {
-        return customerPhoneNumber;
-    }
-
-    public void setCustomerPhoneNumber(String customerPhoneNumber) {
-        this.customerPhoneNumber = customerPhoneNumber;
-    }
-    public List<Contract> getContractList(){
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList){
-        this.contractList=contractList;
+    public void setCustomerRoles(Collection<Role> customerRoles) {
+        this.customerRoles = customerRoles;
     }
 }

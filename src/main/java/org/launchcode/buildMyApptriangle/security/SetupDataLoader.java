@@ -1,11 +1,10 @@
 package org.launchcode.buildMyApptriangle.security;
 
-import org.launchcode.buildMyApptriangle.models.Privilege;
-import org.launchcode.buildMyApptriangle.models.Role;
-import org.launchcode.buildMyApptriangle.models.User;
+import org.launchcode.buildMyApptriangle.models.*;
+import org.launchcode.buildMyApptriangle.models.data.CustomerRepository;
+import org.launchcode.buildMyApptriangle.models.data.EmployeeRepository;
 import org.launchcode.buildMyApptriangle.models.data.PrivilegeRepository;
 import org.launchcode.buildMyApptriangle.models.data.RoleRepository;
-import org.launchcode.buildMyApptriangle.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -15,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 //To be run *once*
 
@@ -26,7 +24,10 @@ import java.util.List;
 //    boolean alreadySetup = false;
 //
 //    @Autowired
-//    private UserRepository userRepository;
+//    private CustomerRepository customerRepository;
+//
+//    @Autowired
+//    private EmployeeRepository employeeRepository;
 //
 //    @Autowired
 //    private RoleRepository roleRepository;
@@ -55,35 +56,43 @@ import java.util.List;
 //
 //        // Create default Admin
 //        Role defaultAdminUser = roleRepository.findByName("ROLE_ADMIN");
-//        User adminUser = new User();
-//        adminUser.setUsername("BrushUp@gmail.com");
-//        adminUser.setFirstName("John");
-//        adminUser.setLastName("Brush");
-//        adminUser.setPassword(passwordEncoder.encode("12345"));
-//        adminUser.setRoles(Arrays.asList(defaultAdminUser));
-//        userRepository.save(adminUser);
+//        Employee adminEmployee = new Employee();
+//        adminEmployee.setUsername("BrushUp@gmail.com");
+//        adminEmployee.setFirstName("John");
+//        adminEmployee.setLastName("Brush");
+//        adminEmployee.setPassword(passwordEncoder.encode("12345"));
+//        adminEmployee.setEmployeeRoles(Arrays.asList(defaultAdminUser));
+//        employeeRepository.save(adminEmployee);
 //
 //        // Create default Employee
 //        Role defaultEmployeeUser = roleRepository.findByName("ROLE_EMPLOYEE");
-//        User EmployeeUser = new User();
-//        EmployeeUser.setUsername("Paintgood@gmail.com");
-//        EmployeeUser.setFirstName("Jane");
-//        EmployeeUser.setLastName("Paintgood");
-//        EmployeeUser.setPassword(passwordEncoder.encode("12345"));
-//        EmployeeUser.setRoles(Arrays.asList(defaultEmployeeUser));
-//        userRepository.save(EmployeeUser);
+//        Employee employeeUser = new Employee();
+//        employeeUser.setUsername("Paintgood@gmail.com");
+//        employeeUser.setFirstName("Jane");
+//        employeeUser.setLastName("Paintgood");
+//        employeeUser.setPassword(passwordEncoder.encode("12345"));
+//        employeeUser.setEmployeeRoles(Arrays.asList(defaultEmployeeUser));
+//        employeeRepository.save(employeeUser);
 //        alreadySetup = true;
 //
 //        // Create default Customer
 //        Role defaultCustomerUser = roleRepository.findByName("ROLE_CUSTOMER");
-//        User customerUser = new User();
+//        Customer customerUser = new Customer();
 //        customerUser.setUsername("Cantpaint@gmail.com");
 //        customerUser.setFirstName("Bob");
 //        customerUser.setLastName("Cantpaint");
 //        customerUser.setPassword(passwordEncoder.encode("12345"));
-//        customerUser.setRoles(Arrays.asList(defaultCustomerUser));
-//        userRepository.save(customerUser);
+//        customerUser.setCustomerRoles(Arrays.asList(defaultCustomerUser));
+//        customerRepository.save(customerUser);
 //        alreadySetup = true;
+//
+//        // Create default Contract
+//        Contract defaultContract = new Contract();
+//        defaultContract.setName("First Job");
+//        defaultContract.setAddress("4811 Delmar Blvd, St. Louis, MO 63108");
+//        defaultContract.setJobDescription("Job for Bob Cantpaint. Give all of Launchcode STL's classrooms a new coat of paint!");
+//        defaultContract.setCustomer(customerUser);
+//        defaultContract.setEmployee(employeeUser);
 //    }
 //
 //    @Transactional

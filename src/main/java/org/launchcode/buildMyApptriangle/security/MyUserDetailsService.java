@@ -1,11 +1,13 @@
 package org.launchcode.buildMyApptriangle.security;
 
 import jakarta.transaction.Transactional;
+import org.launchcode.buildMyApptriangle.models.Customer;
+import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.Privilege;
 import org.launchcode.buildMyApptriangle.models.Role;
-import org.launchcode.buildMyApptriangle.models.User;
+import org.launchcode.buildMyApptriangle.models.data.CustomerRepository;
+import org.launchcode.buildMyApptriangle.models.data.EmployeeRepository;
 import org.launchcode.buildMyApptriangle.models.data.RoleRepository;
-import org.launchcode.buildMyApptriangle.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,20 +24,38 @@ import java.util.List;
 @Transactional
 public class MyUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserRepository userRepository;
+    private CustomerRepository customerRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
     @Autowired
     private RoleRepository roleRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not present"));
-                return new org.springframework.security.core.userdetails.User(
-                        user.getUsername(), user.getPassword(), getAuthorities(user.getRoles())
-                );
+        if (employeeRepository.findEmployeeByUsername(username).isEmpty() && customerRepository.findCustomerByUsername(username).isEmpty()) {
+            throw new UsernameNotFoundException("User not present");
+        }
+        else if (employeeRepository.findEmployeeByUsername(username).isEmpty()) {
+            Customer user = customerRepository.findCustomerByUsername(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("Customer not present"));
+            return new org.springframework.security.core.userdetails.User(
+                    user.getUsername(), user.getPassword(), getAuthorities(user.getCustomerRoles())
+            );
+        }
+        else {
+            Employee user = employeeRepository.findEmployeeByUsername(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("Employee not present"));
+            return new org.springframework.security.core.userdetails.User(
+                    user.getUsername(), user.getPassword(), getAuthorities(user.getEmployeeRoles())
+            );
+        }
     }
-    public void createUser(UserDetails user) {
-        userRepository.save((User) user);
+    public void createCustomer(UserDetails customer) {
+        customerRepository.save((Customer) customer);
+    }
+
+    public void createEmployee(UserDetails employee) {
+        employeeRepository.save((Employee) employee);
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(
