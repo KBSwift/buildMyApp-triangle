@@ -45,18 +45,16 @@ public class WebSecurityConfig {
         http
                 .securityMatcher("/register")
                 .authorizeHttpRequests((authorize) -> authorize
-                        //TODO: currently configured to allow any user on any page for ease of access while creating site. Remove and reconfigure before release!
-//                         .requestMatchers("/").permitAll()
                                 .requestMatchers("/register").anonymous()
                 )
                 .csrf(csrf -> csrf.disable());
         return http.build();
     }
     @Bean
-    @Order(2)
+    @Order(3)
     public SecurityFilterChain basicAuthenticationChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/contracts/", "/customers/", "/employees/")
+                .securityMatcher("/contracts/**", "/customers/**", "/employees/**")
                 .authorizeHttpRequests((authorize) -> authorize
                                 .requestMatchers("/**").authenticated()
                 )
@@ -69,10 +67,10 @@ public class WebSecurityConfig {
         return http.build();
     }
     @Bean
-    @Order(3)
+    @Order(2)
     public SecurityFilterChain adminAuthenticationChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/contracts/**", "/customers/**", "/employees/**")
+                .securityMatcher("/contracts/add", "/contracts/delete", "/customers/add", "/customers/delete", "/employees/add", "/employees/delete")
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/**").hasRole("ADMIN")
                 )
