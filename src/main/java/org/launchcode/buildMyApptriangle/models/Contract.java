@@ -1,23 +1,14 @@
 package org.launchcode.buildMyApptriangle.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-public class Contract{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @NotNull
-    @Size(min=1, max=255)
-    private String name;
-
-    @NotNull
-    @Size(min=1, max=255)
-    private String address;
+public class Contract extends AbstractEntity{
 
     @NotNull
     @Size(min =1, max =255)
@@ -27,69 +18,29 @@ public class Contract{
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-
-    //TODO: Would this be ManyToMany? Multiple employees might work on the same job.
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    public Contract() {
-
-    }
-
-    public Contract(String name, String address, String jobDescription, Customer customer, Employee employee) {
-        this.name = name;
-        this.address = address;
+    public Contract(String jobDescription){
         this.jobDescription = jobDescription;
-        this.customer = customer;
-        this.employee = employee;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Contract(){}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getJobDescription() {
+    public String getJobDescription(){
         return jobDescription;
     }
 
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
+    public void setJobDescription(String jobDescription){
+        this.jobDescription=jobDescription;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Employee getEmployee() {
+    public Employee getEmployee(){
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployee(Employee employee){
+        this.employee= employee;
     }
 }
