@@ -53,7 +53,7 @@ public class CustomerController {
         newCustomer.setCustomerRoles(Arrays.asList(roleRepository.findByName("ROLE_CUSTOMER")));
         newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
         if (errors.hasErrors()) {
-            return "register";
+            return "customers/add";
         }
 
         try {

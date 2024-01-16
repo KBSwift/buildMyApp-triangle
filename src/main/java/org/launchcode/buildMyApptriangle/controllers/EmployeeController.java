@@ -51,7 +51,7 @@ public class EmployeeController {
         newEmployee.setEmployeeRoles(Arrays.asList(roleRepository.findByName("ROLE_EMPLOYEE")));
         newEmployee.setPassword(passwordEncoder.encode(newEmployee.getPassword()));
         if (errors.hasErrors()) {
-            return "register";
+            return "employees/add";
         }
 
         try {
