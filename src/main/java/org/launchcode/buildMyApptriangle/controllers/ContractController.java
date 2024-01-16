@@ -48,7 +48,7 @@ public class ContractController {
         else {
             contractRepository.save(newContract);
         }
-        return "redirect:";
+        return "redirect:/contracts/";
     }
 
     @GetMapping("delete")
@@ -60,6 +60,44 @@ public class ContractController {
     @PostMapping("delete")
     public String processDeleteContractForm(@ModelAttribute @Valid Contract deleteContract) {
         contractRepository.deleteById(deleteContract.getId());
-        return "redirect:";
+        return "redirect:/contracts/";
+    }
+
+    @GetMapping("view/{id}")
+    public String displayViewContract(Model model, @PathVariable Long id) {
+        Optional optionalContract = contractRepository.findById(id);
+        if (optionalContract.isPresent()) {
+            Contract contract = (Contract) optionalContract.get();
+            model.addAttribute("contract", contract);
+            return "contracts/view";
+        } else {
+            return "redirect:/contracts/";
+        }
+    }
+
+    @GetMapping("view/{id}/update")
+    public String displayUpdateContract(Model model, @PathVariable Long id) {
+        Optional optionalContract = contractRepository.findById(id);
+        if (optionalContract.isPresent()) {
+            Contract contract = (Contract) optionalContract.get();
+            model.addAttribute("contract", contract);
+            model.addAttribute("employees", employeeRepository.findAll());
+            model.addAttribute("customers", customerRepository.findAll());
+            return "contracts/update";
+        } else {
+            return "redirect:/contracts/";
+        }
+    }
+
+    @PostMapping("view/{id}/update")
+    public String processUpdateContract(Model model, @PathVariable Long id, @ModelAttribute @Valid Contract contract,
+                                        Errors errors) {
+        if (errors.hasErrors()) {
+            return "view/{id}/update";
+        }
+        else {
+            contractRepository.save(contract);
+        }
+        return "redirect:/contracts/view/" + id;
     }
 }

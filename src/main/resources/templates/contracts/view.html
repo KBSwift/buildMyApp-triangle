@@ -6,7 +6,12 @@
 </head>
 <body>
     <main>
-        page to read and display data from repository
+            <p th:text="${contract.name}"></p>
+            <p th:text="${contract.address}"></p>
+            <p th:text="${contract.jobDescription}"></p>
+            <p th:text="${contract.customer.firstName}"></p>
+            <p th:text="${contract.customer.username}"></p>
+            <p th:text="${contract.employee.firstName}"></p>
     </main>
 </body>
 </html>

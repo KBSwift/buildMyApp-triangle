@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Contract</title>
+</head>
+<body>
+<main>
+<!--    <p th:text="${contract.name}"></p>-->
+<!--    <p th:text="${contract.address}"></p>-->
+<!--    <p th:text="${contract.jobDescription}"></p>-->
+<!--    <p th:text="${contract.customer.firstName}"></p>-->
+<!--    <p th:text="${contract.customer.username}"></p>-->
+<!--    <p th:text="${contract.employee.firstName}"></p>-->
+
+    <form method="post">
+        <div>
+            <label> Contract Name : <input type="text" name="name" th:value="${contract.name}"/></label>
+        </div>
+        <div>
+            <label> Address : <input type="text" name="address" th:value="${contract.address}"/></label>
+        </div>
+        <div>
+            <label> Job Description : <input type="text" name="jobDescription" th:value="${contract.jobDescription}"/></label>
+        </div>
+        <div>
+            <label> Customer :
+                <select name="customer">
+                    <option th:each="customer: ${customers}" th:selected=${contract.customer} th:value="${customer.id}" th:text="${customer.username}"></option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label> Employee :
+                <select name="employee">
+                    <option th:each="employee: ${employees}" th:selected=${contract.employee} th:value="${employee.id}" th:text="${employee.username}"></option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <input type="submit" value="update"/>
+        </div>
+    </form>
+</main>
+</body>
+</html>
