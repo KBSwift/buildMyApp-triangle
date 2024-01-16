@@ -13,6 +13,7 @@
             <p th:text="${contract.customer.firstName}"></p>
             <p th:text="${contract.customer.username}"></p>
             <p th:text="${contract.employee.firstName}"></p>
+        <a th:href="@{'/contracts/view/' + ${contract.id} + '/update'}">Update?</a>
     </main>
 </body>
 </html>

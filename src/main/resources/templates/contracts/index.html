@@ -24,6 +24,9 @@
         </tr>
         <tr th:each="contract : ${contracts}">
             <td>
+                <a th:href="@{'/contracts/view/' + ${contract.id}}" th:text="${contract.id}"></a>
+            </td>
+            <td>
                 <p th:text="${contract.name}"></p>
             </td>
             <td>

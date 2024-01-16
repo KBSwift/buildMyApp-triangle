@@ -9,6 +9,6 @@
     <p th:text="${customer.firstName}"></p>
     <p th:text="${customer.lastName}"></p>
     <p th:text="${customer.username}"></p>
-<a th:href="@{'/customers/view/' + ${id} + '/update'}">Update?</a>
+<a th:href="@{'/customers/view/' + ${customer.id} + '/update'}">Update?</a>
 </body>
 </html>
