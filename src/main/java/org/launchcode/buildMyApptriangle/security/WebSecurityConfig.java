@@ -25,7 +25,7 @@ public class WebSecurityConfig {
     TODO: Re-enable csrf in lowest precedence chain before release! */
 
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order(Ordered.LOWEST_PRECEDENCE)
     public SecurityFilterChain securityFilterChainTwo(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests

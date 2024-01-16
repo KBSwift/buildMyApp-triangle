@@ -6,13 +6,7 @@
 </head>
 <body>
 <main>
-<!--    <p th:text="${contract.name}"></p>-->
-<!--    <p th:text="${contract.address}"></p>-->
-<!--    <p th:text="${contract.jobDescription}"></p>-->
-<!--    <p th:text="${contract.customer.firstName}"></p>-->
-<!--    <p th:text="${contract.customer.username}"></p>-->
-<!--    <p th:text="${contract.employee.firstName}"></p>-->
-
+    <div th:replace="fragments :: navbar"></div>
     <form method="post">
         <div>
             <label> Contract Name : <input type="text" name="name" th:value="${contract.name}"/></label>

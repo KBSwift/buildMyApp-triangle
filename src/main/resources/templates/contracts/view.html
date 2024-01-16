@@ -6,6 +6,7 @@
 </head>
 <body>
     <main>
+        <div th:replace="fragments :: navbar"></div>
             <p th:text="${contract.name}"></p>
             <p th:text="${contract.address}"></p>
             <p th:text="${contract.jobDescription}"></p>
