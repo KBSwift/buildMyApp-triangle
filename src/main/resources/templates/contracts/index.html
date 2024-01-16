@@ -12,5 +12,36 @@
         <p>Display table of all data for managers</p>
         <p>display relevant data for customers + employees</p>
     </main>
+
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Job Description</td>
+            <td>Customer</td>
+            <td>Contact</td>
+            <td>Employee</td>
+        </tr>
+        <tr th:each="contract : ${contracts}">
+            <td>
+                <p th:text="${contract.name}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.address}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.jobDescription}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.customer.firstName}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.customer.username}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.employee.firstName}"></p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -12,5 +12,24 @@
         <p>Display table of all data for managers</p>
         <p>display relevant data for customers + employees</p>
     </main>
+
+    <table>
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+        </tr>
+        <tr th:each="employee : ${employees}">
+            <td>
+                <p th:text="${employee.firstName}"></p>
+            </td>
+            <td>
+                <p th:text="${employee.lastName}"></p>
+            </td>
+            <td>
+                <p th:text="${employee.username}"></p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -31,7 +31,8 @@ public class CustomerController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("customers", customerRepository.findAll());
         return "customers/index";
     }
 

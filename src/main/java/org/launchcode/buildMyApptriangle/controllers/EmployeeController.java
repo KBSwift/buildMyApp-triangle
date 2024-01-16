@@ -29,7 +29,8 @@ public class EmployeeController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("employees", employeeRepository.findAll());
         return "employees/index";
     }
 
