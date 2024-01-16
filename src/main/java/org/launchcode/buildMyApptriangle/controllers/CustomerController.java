@@ -106,7 +106,7 @@ public class CustomerController {
             // In order to export to database when encrypted, the data has to be changed to a specific type.
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
             MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-    public String processUpdateContract(Model model, @PathVariable Long id, @ModelAttribute @Valid Customer customer,
+    public String processUpdateCustomer(Model model, @PathVariable Long id, @ModelAttribute @Valid Customer customer,
                                         Errors errors) {
         if (errors.hasErrors()) {
             return "view/"+ id + "/update";

@@ -1,7 +1,7 @@
 package org.launchcode.buildMyApptriangle.controllers;
 
 import jakarta.validation.Valid;
-import org.launchcode.buildMyApptriangle.models.Customer;
+import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.data.EmployeeRepository;
 import org.launchcode.buildMyApptriangle.models.data.RoleRepository;
@@ -75,5 +75,44 @@ public class EmployeeController {
         return "redirect:";
     }
 
-//    @GetMapping("view/{employeeId}")
+    @GetMapping("view/{id}")
+    public String displayViewEmployee(Model model, @PathVariable Long id) {
+        Optional optionalEmployee = employeeRepository.findById(id);
+        if (optionalEmployee.isPresent()) {
+            Employee employee = (Employee) optionalEmployee.get();
+            model.addAttribute("employee", employee);
+            return "employees/view";
+        } else {
+            return "redirect:/employees/";
+        }
+    }
+
+    @GetMapping("view/{id}/update")
+    public String displayUpdateEmployee(Model model, @PathVariable Long id) {
+        Optional optionalEmpoyee = employeeRepository.findById(id);
+        if (optionalEmpoyee.isPresent()) {
+            Employee employee = (Employee) optionalEmpoyee.get();
+            model.addAttribute("employee", employee);
+            return "employees/update";
+        } else {
+            return "redirect:/employees/";
+        }
+    }
+
+    @PostMapping(
+            value = "view/{id}/update",
+            // In order to export to database when encrypted, the data has to be changed to a specific type.
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
+            MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public String processUpdateEmployee(Model model, @PathVariable Long id, @ModelAttribute @Valid Employee employee,
+                                        Errors errors) {
+        if (errors.hasErrors()) {
+            return "view/"+ id + "/update";
+        }
+        else {
+            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+            employeeRepository.save(employee);
+        }
+        return "redirect:/employees/view/" + id;
+    }
 }
