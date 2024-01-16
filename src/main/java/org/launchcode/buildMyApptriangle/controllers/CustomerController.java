@@ -1,7 +1,7 @@
 package org.launchcode.buildMyApptriangle.controllers;
 
 import jakarta.validation.Valid;
-import org.launchcode.buildMyApptriangle.models.Contract;
+import org.launchcode.buildMyApptriangle.models.Customer;
 import org.launchcode.buildMyApptriangle.models.Customer;
 import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.data.CustomerRepository;
@@ -77,5 +77,44 @@ public class CustomerController {
         return "redirect:";
     }
 
-//    @GetMapping("view/{customerId}")
+    @GetMapping("view/{id}")
+    public String displayViewCustomer(Model model, @PathVariable Long id) {
+        Optional optionalCustomer = customerRepository.findById(id);
+        if (optionalCustomer.isPresent()) {
+            Customer customer = (Customer) optionalCustomer.get();
+            model.addAttribute("customer", customer);
+            return "customers/view";
+        } else {
+            return "redirect:/customers/";
+        }
+    }
+
+    @GetMapping("view/{id}/update")
+    public String displayUpdateCustomer(Model model, @PathVariable Long id) {
+        Optional optionalCustomer = customerRepository.findById(id);
+        if (optionalCustomer.isPresent()) {
+            Customer customer = (Customer) optionalCustomer.get();
+            model.addAttribute("customer", customer);
+            return "customers/update";
+        } else {
+            return "redirect:/customers/";
+        }
+    }
+
+    @PostMapping(
+            value = "view/{id}/update",
+            // In order to export to database when encrypted, the data has to be changed to a specific type.
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
+            MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public String processUpdateContract(Model model, @PathVariable Long id, @ModelAttribute @Valid Customer customer,
+                                        Errors errors) {
+        if (errors.hasErrors()) {
+            return "view/"+ id + "/update";
+        }
+        else {
+            customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+            customerRepository.save(customer);
+        }
+        return "redirect:/customers/view/" + id;
+    }
 }
