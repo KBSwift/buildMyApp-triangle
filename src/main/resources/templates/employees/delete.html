@@ -12,7 +12,13 @@
 
 <form method="post">
     <div>
-        <label> Email : <input type="text" name="username"/></label>
+        <div>
+            <label> Contract :
+                <select name="employee">
+                    <option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.username}"></option>
+                </select>
+            </label>
+        </div>
     </div>
     <div>
         <input type="submit" value="delete"/>

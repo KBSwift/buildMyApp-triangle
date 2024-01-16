@@ -53,20 +53,13 @@ public class ContractController {
 
     @GetMapping("delete")
     public String displayDeleteContractForm(Model model) {
+        model.addAttribute("contracts", contractRepository.findAll());
         return "contracts/delete";
     }
 
     @PostMapping("delete")
-    public String processDeleteContractForm(@RequestParam("id") String id) {
-        Optional optionalContract = contractRepository.findById(id);
-        if (optionalContract.isPresent()) {
-            contractRepository.deleteById(id);
-            return "redirect:";
-        }
-        else {
-            return "contracts/delete";
-        }
+    public String processDeleteContractForm(@ModelAttribute @Valid Contract deleteContract) {
+        contractRepository.deleteById(deleteContract.getId());
+        return "redirect:";
     }
-
-//    @GetMapping("view/{contractId}")
 }

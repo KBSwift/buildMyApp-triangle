@@ -1,6 +1,7 @@
 package org.launchcode.buildMyApptriangle.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.buildMyApptriangle.models.Customer;
 import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.data.EmployeeRepository;
 import org.launchcode.buildMyApptriangle.models.data.RoleRepository;
@@ -64,20 +65,14 @@ public class EmployeeController {
 
     @GetMapping("delete")
     public String displayDeleteEmployeeForm(Model model) {
+        model.addAttribute("employees", employeeRepository.findAll());
         return "employees/delete";
     }
 
     @PostMapping("delete")
-    public String processDeleteEmployeeForm(@RequestParam("username") String username) {
-        Optional optionalEmployee = employeeRepository.findEmployeeByUsername(username);
-        if (optionalEmployee.isPresent()) {
-            Employee employee = (Employee) optionalEmployee.get();
-            employeeRepository.deleteById(employee.getId());
-            return "redirect:";
-        }
-        else {
-            return "employees/delete";
-        }
+    public String processDeleteEmployeeForm(@ModelAttribute @Valid Employee deleteEmployee) {
+        employeeRepository.deleteById(deleteEmployee.getId());
+        return "redirect:";
     }
 
 //    @GetMapping("view/{employeeId}")

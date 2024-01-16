@@ -12,10 +12,17 @@
 
     <form method="post">
         <div>
-            <label> Email : <input type="text" name="username"/></label>
+            <div>
+                <label> Contract :
+                    <select name="customer">
+                        <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.username}"></option>
+                    </select>
+                </label>
+            </div>
         </div>
         <div>
             <input type="submit" value="delete"/>
         </div>
+    </form>
 </body>
 </html>

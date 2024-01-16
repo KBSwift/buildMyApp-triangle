@@ -1,6 +1,7 @@
 package org.launchcode.buildMyApptriangle.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.buildMyApptriangle.models.Contract;
 import org.launchcode.buildMyApptriangle.models.Customer;
 import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.data.CustomerRepository;
@@ -66,20 +67,14 @@ public class CustomerController {
 
     @GetMapping("delete")
     public String displayDeleteCustomerForm(Model model) {
+        model.addAttribute("customers", customerRepository.findAll());
         return "customers/delete";
     }
 
     @PostMapping("delete")
-    public String processDeleteCustomerForm(@RequestParam("username") String username) {
-        Optional optionalCustomer = customerRepository.findCustomerByUsername(username);
-        if (optionalCustomer.isPresent()) {
-            Customer customer = (Customer) optionalCustomer.get();
-            customerRepository.deleteById(customer.getId());
-            return "redirect:";
-        }
-        else {
-            return "customers/delete";
-        }
+    public String processDeleteCustomerForm(@ModelAttribute @Valid Customer deleteCustomer) {
+        customerRepository.deleteById(deleteCustomer.getId());
+        return "redirect:";
     }
 
 //    @GetMapping("view/{customerId}")
