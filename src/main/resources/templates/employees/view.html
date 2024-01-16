@@ -9,5 +9,6 @@
 <p th:text="${employee.firstName}"></p>
 <p th:text="${employee.lastName}"></p>
 <p th:text="${employee.username}"></p>
+<a th:href="@{'/employees/view/' + ${id} + '/update'}">Update?</a>
 </body>
 </html>

@@ -21,6 +21,9 @@
         </tr>
         <tr th:each="customer : ${customers}">
             <td>
+                <a th:href="@{'/customers/view/' + ${customer.id}}" th:text="${customer.id}"></a>
+            </td>
+            <td>
                 <p th:text="${customer.firstName}"></p>
             </td>
             <td>
