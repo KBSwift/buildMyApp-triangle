@@ -33,13 +33,19 @@
                 <p th:text="${contract.jobDescription}"></p>
             </td>
             <td>
-                <p th:text="${contract.customer.firstName}"></p>
+                <p th:if="${contract.customer != null}" th:text="${contract.customer.firstName}">
+                    No Customer Assigned!
+                </p>
             </td>
             <td>
-                <p th:text="${contract.customer.username}"></p>
+                <p th:if="${contract.customer != null}" th:text="contract.customer.username">
+                    No Customer Assigned!
+                </p>
             </td>
             <td>
-                <p th:text="${contract.employee.firstName}"></p>
+                <p th:if="${contract.employee != null}" th:text="contract.employee.firstName">
+                    No Employee Assigned!
+                </p>
             </td>
         </tr>
     </table>
