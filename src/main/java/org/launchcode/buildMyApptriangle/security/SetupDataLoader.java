@@ -1,10 +1,7 @@
 package org.launchcode.buildMyApptriangle.security;
 
 import org.launchcode.buildMyApptriangle.models.*;
-import org.launchcode.buildMyApptriangle.models.data.CustomerRepository;
-import org.launchcode.buildMyApptriangle.models.data.EmployeeRepository;
-import org.launchcode.buildMyApptriangle.models.data.PrivilegeRepository;
-import org.launchcode.buildMyApptriangle.models.data.RoleRepository;
+import org.launchcode.buildMyApptriangle.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -28,6 +25,8 @@ import java.util.Collection;
 //
 //    @Autowired
 //    private EmployeeRepository employeeRepository;
+//    @Autowired
+//    private ContractRepository contractRepository;
 //
 //    @Autowired
 //    private RoleRepository roleRepository;
@@ -73,7 +72,6 @@ import java.util.Collection;
 //        employeeUser.setPassword(passwordEncoder.encode("12345"));
 //        employeeUser.setEmployeeRoles(Arrays.asList(defaultEmployeeUser));
 //        employeeRepository.save(employeeUser);
-//        alreadySetup = true;
 //
 //        // Create default Customer
 //        Role defaultCustomerUser = roleRepository.findByName("ROLE_CUSTOMER");
@@ -84,7 +82,6 @@ import java.util.Collection;
 //        customerUser.setPassword(passwordEncoder.encode("12345"));
 //        customerUser.setCustomerRoles(Arrays.asList(defaultCustomerUser));
 //        customerRepository.save(customerUser);
-//        alreadySetup = true;
 //
 //        // Create default Contract
 //        Contract defaultContract = new Contract();
@@ -93,6 +90,8 @@ import java.util.Collection;
 //        defaultContract.setJobDescription("Job for Bob Cantpaint. Give all of Launchcode STL's classrooms a new coat of paint!");
 //        defaultContract.setCustomer(customerUser);
 //        defaultContract.setEmployee(employeeUser);
+//        contractRepository.save(defaultContract);
+//        alreadySetup = true;
 //    }
 //
 //    @Transactional

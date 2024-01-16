@@ -2,12 +2,30 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Add Contract</title>
+    <title>Add Customer</title>
 </head>
 <body>
-    <main>
-        only accessible to managers
-        form to add data
-    </main>
+<main>
+    only accessible to managers
+    form to add data
+</main>
+
+<form method="post">
+    <div>
+        <label> Email : <input type="text" name="username"/></label>
+    </div>
+    <div>
+        <label> Password : <input type="password" name="password"/></label>
+    </div>
+    <div>
+        <label> First Name : <input type="text" name="firstName"/></label>
+    </div>
+    <div>
+        <label> Last Name : <input type="text" name="lastName"/></label>
+    </div>
+    <div>
+        <input type="submit" value="add"/>
+    </div>
+</form>
 </body>
 </html>
