@@ -38,12 +38,12 @@
                 </p>
             </td>
             <td>
-                <p th:if="${contract.customer != null}" th:text="contract.customer.username">
+                <p th:if="${contract.customer != null}" th:text="${contract.customer.username}">
                     No Customer Assigned!
                 </p>
             </td>
             <td>
-                <p th:if="${contract.employee != null}" th:text="contract.employee.firstName">
+                <p th:if="${contract.employee != null}" th:text="${contract.employee.firstName}">
                     No Employee Assigned!
                 </p>
             </td>
