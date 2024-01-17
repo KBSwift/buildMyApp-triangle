@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>View Contract</title>
@@ -13,7 +13,7 @@
             <p th:text="${contract.customer.firstName}"></p>
             <p th:text="${contract.customer.username}"></p>
             <p th:text="${contract.employee.firstName}"></p>
-        <a th:href="@{'/contracts/view/' + ${contract.id} + '/update'}">Update?</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/contracts/view/' + ${contract.id} + '/update'}">Update?</a>
     </main>
 </body>
 </html>
