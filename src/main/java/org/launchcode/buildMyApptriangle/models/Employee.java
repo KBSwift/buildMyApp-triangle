@@ -31,7 +31,6 @@ public class Employee extends AbstractUser{
     }
 
     public Employee() {
-
     }
 
     public Employee( String username, String password, String firstName, String lastName, Collection<Role> employeeRoles) {
