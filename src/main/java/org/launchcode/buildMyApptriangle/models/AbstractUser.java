@@ -11,9 +11,6 @@ import java.util.List;
 
 @MappedSuperclass
 public abstract class AbstractUser implements UserDetails {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
 
     @Email
     @NotNull
@@ -36,27 +33,10 @@ public abstract class AbstractUser implements UserDetails {
         this.lastName = lastName;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    @Override
+    public abstract Collection<? extends GrantedAuthority> getAuthorities();
 
     //Getters and Setters
-//    public Collection<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Collection<Role> roles) {
-//        this.roles = roles;
-//    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
-    }
     @Override
     public String getPassword() {
         return password;
