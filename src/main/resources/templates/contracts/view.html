@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>View Contract</title>
 </head>
 <body>
     <main>
-        page to read and display data from repository
+        <div th:replace="fragments :: navbar"></div>
+            <p th:text="${contract.name}"></p>
+            <p th:text="${contract.address}"></p>
+            <p th:text="${contract.jobDescription}"></p>
+            <p th:text="${contract.customer.firstName}"></p>
+            <p th:text="${contract.customer.username}"></p>
+            <p th:text="${contract.employee.firstName}"></p>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/contracts/view/' + ${contract.id} + '/update'}">Update?</a>
     </main>
 </body>
 </html>

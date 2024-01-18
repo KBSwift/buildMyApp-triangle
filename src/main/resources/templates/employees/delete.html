@@ -5,9 +5,25 @@
     <title>Delete Contract</title>
 </head>
 <body>
-    <main>
-        only accessible to managers
-        form to delete data (archive on database side)
-    </main>
+<main>
+    <div th:replace="fragments :: navbar"></div>
+    only accessible to managers
+    form to add data
+</main>
+
+<form method="post">
+    <div>
+        <div>
+            <label> Contract :
+                <select name="employee">
+                    <option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.username}"></option>
+                </select>
+            </label>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="delete"/>
+    </div>
+</form>
 </body>
 </html>

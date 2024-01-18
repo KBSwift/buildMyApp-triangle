@@ -1,6 +1,7 @@
 package org.launchcode.buildMyApptriangle.models;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,8 +25,12 @@ public class Employee extends AbstractUser{
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Contract> contracts;
 
-    public Employee() {
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(() -> "read");
+    }
 
+    public Employee() {
     }
 
     public Employee( String username, String password, String firstName, String lastName, Collection<Role> employeeRoles) {
