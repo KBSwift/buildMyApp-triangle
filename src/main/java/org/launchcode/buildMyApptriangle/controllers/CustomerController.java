@@ -5,10 +5,14 @@ import org.launchcode.buildMyApptriangle.models.Customer;
 import org.launchcode.buildMyApptriangle.models.Customer;
 import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.data.CustomerRepository;
+import org.launchcode.buildMyApptriangle.models.data.EmployeeRepository;
 import org.launchcode.buildMyApptriangle.models.data.RoleRepository;
 import org.launchcode.buildMyApptriangle.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +33,29 @@ public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("customers", customerRepository.findAll());
+//        model.addAttribute("contracts", contractRepository.findAll());
+
+        // Check what kind of user the account is, then pass in the current user object as a model.
+        if (employeeRepository.findEmployeeByUsername(userDetails.getUsername()).isEmpty() && customerRepository.findCustomerByUsername(userDetails.getUsername()).isEmpty()) {
+            throw new UsernameNotFoundException("User not present");
+        }
+        else if (employeeRepository.findEmployeeByUsername(userDetails.getUsername()).isEmpty()) {
+            Customer user = customerRepository.findCustomerByUsername(userDetails.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("Customer not present"));
+            model.addAttribute("user", user);
+        }
+        else {
+            Employee user = employeeRepository.findEmployeeByUsername(userDetails.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("Employee not present"));
+            model.addAttribute("user", user);
+        }
         return "customers/index";
     }
 

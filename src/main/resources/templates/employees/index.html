@@ -21,7 +21,7 @@
             <td>Email</td>
         </tr>
         <tr th:each="employee : ${employees}"
-            th:if="${user.id == employee.id} or
+            th:if="${employee.equals(user)} or
             ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
             <td>
                 <a th:href="@{'/employees/view/' + ${employee.id}}" th:text="${employee.id}"></a>
@@ -35,9 +35,9 @@
             <td>
                 <p th:text="${employee.username}"></p>
             </td>
-            <td th:each="contract : ${employee.contracts}">
-                <p th:text="${contract.id}"></p>
-            </td>
+<!--            <td th:each="contract : ${employee.contracts}">-->
+<!--                <p th:text="${contract.id}"></p>-->
+<!--            </td>-->
         </tr>
     </table>
 </body>

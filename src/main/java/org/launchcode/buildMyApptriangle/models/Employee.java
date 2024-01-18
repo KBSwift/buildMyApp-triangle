@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Employee extends AbstractUser implements UserDetails {
@@ -61,5 +62,18 @@ public class Employee extends AbstractUser implements UserDetails {
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee employee)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(id, employee.id) && Objects.equals(employeeRoles, employee.employeeRoles) && Objects.equals(contracts, employee.contracts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, employeeRoles, contracts);
     }
 }

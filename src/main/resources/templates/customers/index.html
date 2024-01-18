@@ -19,7 +19,9 @@
             <td>Last Name</td>
             <td>Email</td>
         </tr>
-        <tr th:each="customer : ${customers}">
+        <tr th:each="customer : ${customers}"
+            th:if="${customer.equals(user)} or
+            ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
             <td>
                 <a th:href="@{'/customers/view/' + ${customer.id}}" th:text="${customer.id}"></a>
             </td>
