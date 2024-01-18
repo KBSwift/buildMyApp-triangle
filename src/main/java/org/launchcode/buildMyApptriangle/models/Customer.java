@@ -21,8 +21,8 @@ public class Customer extends AbstractUser{
                     name= "role_id", referencedColumnName = "id"))
     private Collection<Role> customerRoles;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Contract> contracts;
+    /*@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Contract> contracts;*/
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

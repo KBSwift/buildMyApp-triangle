@@ -28,8 +28,9 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation("org.jmockit:jmockit:1.49")
-	implementation('javax.mail:mail:1.5.0-b01')
+	implementation 'javax.mail:mail:1.5.0-b01'
 	implementation 'com.google.apis:google-api-services-gmail:v1-rev110-1.25.0'
+	compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
 }
 
 tasks.named('test') {

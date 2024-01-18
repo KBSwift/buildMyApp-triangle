@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class Employee extends AbstractUser{
@@ -22,8 +21,8 @@ public class Employee extends AbstractUser{
 
 
     //TODO: Would this be ManyToMany? Multiple employees might work on the same job.
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<Contract> contracts;
+  /*  @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Contract> contracts;*/
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

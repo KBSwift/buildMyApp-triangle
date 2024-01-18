@@ -1,15 +1,9 @@
+/*
 package org.launchcode.buildMyApptriangle.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
-@Entity
-public class Contract extends AbstractEntity{
-
+public class Contract{
+*/
+/*
     @NotNull
     @Size(min =1, max =255)
     private String jobDescription;
@@ -18,9 +12,7 @@ public class Contract extends AbstractEntity{
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+
 
     public Contract(String jobDescription){
         this.jobDescription = jobDescription;
@@ -36,11 +28,7 @@ public class Contract extends AbstractEntity{
         this.jobDescription=jobDescription;
     }
 
-    public Employee getEmployee(){
-        return employee;
-    }
+    }*//*
 
-    public void setEmployee(Employee employee){
-        this.employee= employee;
-    }
 }
+*/
