@@ -12,5 +12,45 @@
         <p>Display table of all data for managers</p>
         <p>display relevant data for customers + employees</p>
     </main>
+
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Job Description</td>
+            <td>Customer</td>
+            <td>Contact</td>
+            <td>Employee</td>
+        </tr>
+        <tr th:each="contract : ${contracts}">
+            <td>
+                <a th:href="@{'/contracts/view/' + ${contract.id}}" th:text="${contract.id}"></a>
+            </td>
+            <td>
+                <p th:text="${contract.name}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.address}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.jobDescription}"></p>
+            </td>
+            <td>
+                <p th:if="${contract.customer != null}" th:text="${contract.customer.firstName}">
+                    No Customer Assigned!
+                </p>
+            </td>
+            <td>
+                <p th:if="${contract.customer != null}" th:text="${contract.customer.username}">
+                    No Customer Assigned!
+                </p>
+            </td>
+            <td>
+                <p th:if="${contract.employee != null}" th:text="${contract.employee.firstName}">
+                    No Employee Assigned!
+                </p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -6,8 +6,24 @@
 </head>
 <body>
     <main>
+        <div th:replace="fragments :: navbar"></div>
         only accessible to managers
         form to delete data (archive on database side)
     </main>
+
+    <form method="post">
+        <div>
+            <div>
+                <label> Contract :
+                    <select name="customer">
+                        <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.username}"></option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="delete"/>
+        </div>
+    </form>
 </body>
 </html>

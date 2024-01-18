@@ -2,27 +2,22 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Add Employee</title>
+    <title>Update Customer</title>
 </head>
 <body>
-    <main>
-        <div th:replace="fragments :: navbar"></div>
-        only accessible to managers
-        form to add data
-    </main>
-
+<div th:replace="fragments :: navbar"></div>
     <form method="post">
         <div>
-            <label> Email : <input type="text" name="username"/></label>
+            <label> Email : <input type="text" name="username" th:value="${customer.username}"/></label>
         </div>
         <div>
             <label> Password : <input type="password" name="password"/></label>
         </div>
         <div>
-            <label> First Name : <input type="text" name="firstName"/></label>
+            <label> First Name : <input type="text" name="firstName" th:value="${customer.firstName}"/></label>
         </div>
         <div>
-            <label> Last Name : <input type="text" name="lastName"/></label>
+            <label> Last Name : <input type="text" name="lastName" th:value="${customer.lastName}"/></label>
         </div>
         <div>
             <input type="submit" value="add"/>
