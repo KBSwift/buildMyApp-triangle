@@ -6,6 +6,7 @@ public class EmailForm {
     private String subject;
     private String body;
 
+    public EmailForm(){}
     public String getEmail() {
         return email;
     }
@@ -29,5 +30,5 @@ public class EmailForm {
     public void setBody(String body) {
         this.body = body;
     }
-    
+
 }

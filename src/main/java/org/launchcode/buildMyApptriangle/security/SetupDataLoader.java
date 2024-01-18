@@ -1,19 +1,22 @@
-package org.launchcode.buildMyApptriangle.security;
-
-import org.launchcode.buildMyApptriangle.models.*;
-import org.launchcode.buildMyApptriangle.models.data.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Arrays;
-import java.util.Collection;
-
-//To be run *once*
-
+//package org.launchcode.buildMyApptriangle.security;
+//
+////To be run *once*
+//
+//import jakarta.transaction.Transactional;
+//import org.launchcode.buildMyApptriangle.models.Customer;
+//import org.launchcode.buildMyApptriangle.models.Employee;
+//import org.launchcode.buildMyApptriangle.models.Privilege;
+//import org.launchcode.buildMyApptriangle.models.Role;
+//import org.launchcode.buildMyApptriangle.models.data.*;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.ApplicationListener;
+//import org.springframework.context.event.ContextRefreshedEvent;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.stereotype.Component;
+//
+//import java.util.Arrays;
+//import java.util.Collection;
+//
 //@Component
 //public class SetupDataLoader implements
 //        ApplicationListener<ContextRefreshedEvent> {
@@ -25,8 +28,8 @@ import java.util.Collection;
 //
 //    @Autowired
 //    private EmployeeRepository employeeRepository;
-//    @Autowired
-//    private ContractRepository contractRepository;
+////    @Autowired
+////    private ContractRepository contractRepository;
 //
 //    @Autowired
 //    private RoleRepository roleRepository;
@@ -84,14 +87,14 @@ import java.util.Collection;
 //        customerRepository.save(customerUser);
 //
 //        // Create default Contract
-//        Contract defaultContract = new Contract();
-//        defaultContract.setName("First Job");
-//        defaultContract.setAddress("4811 Delmar Blvd, St. Louis, MO 63108");
-//        defaultContract.setJobDescription("Job for Bob Cantpaint. Give all of Launchcode STL's classrooms a new coat of paint!");
-//        defaultContract.setCustomer(customerUser);
-//        defaultContract.setEmployee(employeeUser);
-//        contractRepository.save(defaultContract);
-//        alreadySetup = true;
+////        Contract defaultContract = new Contract();
+////        defaultContract.setName("First Job");
+////        defaultContract.setAddress("4811 Delmar Blvd, St. Louis, MO 63108");
+////        defaultContract.setJobDescription("Job for Bob Cantpaint. Give all of Launchcode STL's classrooms a new coat of paint!");
+////        defaultContract.setCustomer(customerUser);
+////        defaultContract.setEmployee(employeeUser);
+////        contractRepository.save(defaultContract);
+////        alreadySetup = true;
 //    }
 //
 //    @Transactional

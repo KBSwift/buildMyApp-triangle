@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thmeleaf.org">
+<html  lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+    </head>
+    <body>
+    <h1>Contact Form</h1>
+    <form th:action="a(/contact)" method="post" th:object="${EmailForm}">
+        <label>Email</label>
+        <input type="text" th:field="*{email}" /><br/>
+
+        <label>Subject</label>
+        <input type="text" th:field="*{subject}" /><br/>
+
+        <label>Message</label>
+        <textarea rows="5" cols="25" th:field="*{body}"></textarea>
+        <br/>
+
+        <button type="submit">Send</button>
+    </form>
+
+    </body>
+    </html>
