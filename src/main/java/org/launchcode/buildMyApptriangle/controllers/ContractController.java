@@ -3,10 +3,14 @@ package org.launchcode.buildMyApptriangle.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.buildMyApptriangle.models.Contract;
 import org.launchcode.buildMyApptriangle.models.Customer;
+import org.launchcode.buildMyApptriangle.models.Employee;
 import org.launchcode.buildMyApptriangle.models.data.ContractRepository;
 import org.launchcode.buildMyApptriangle.models.data.CustomerRepository;
 import org.launchcode.buildMyApptriangle.models.data.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -26,8 +30,23 @@ public class ContractController {
     private EmployeeRepository employeeRepository;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("contracts", contractRepository.findAll());
+
+        // Check what kind of user the account is, then pass in the current user object as a model.
+        if (employeeRepository.findEmployeeByUsername(userDetails.getUsername()).isEmpty() && customerRepository.findCustomerByUsername(userDetails.getUsername()).isEmpty()) {
+            throw new UsernameNotFoundException("User not present");
+        }
+        else if (employeeRepository.findEmployeeByUsername(userDetails.getUsername()).isEmpty()) {
+            Customer user = customerRepository.findCustomerByUsername(userDetails.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("Customer not present"));
+            model.addAttribute("user", user);
+        }
+        else {
+            Employee user = employeeRepository.findEmployeeByUsername(userDetails.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("Employee not present"));
+            model.addAttribute("user", user);
+        }
         return "contracts/index";
     }
 
