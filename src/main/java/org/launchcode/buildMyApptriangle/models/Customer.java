@@ -2,12 +2,13 @@ package org.launchcode.buildMyApptriangle.models;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Customer extends AbstractUser{
+public class Customer extends AbstractUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -52,5 +53,13 @@ public class Customer extends AbstractUser{
 
     public void setCustomerRoles(Collection<Role> customerRoles) {
         this.customerRoles = customerRoles;
+    }
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
     }
 }

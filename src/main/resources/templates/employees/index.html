@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Employee Index</title>
@@ -12,14 +12,17 @@
         <p>Display table of all data for managers</p>
         <p>display relevant data for customers + employees</p>
     </main>
-
+    <div>
+    </div>
     <table>
         <tr>
             <td>First Name</td>
             <td>Last Name</td>
             <td>Email</td>
         </tr>
-        <tr th:each="employee : ${employees}">
+        <tr th:each="employee : ${employees}"
+            th:if="${user.id == employee.id} or
+            ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
             <td>
                 <a th:href="@{'/employees/view/' + ${employee.id}}" th:text="${employee.id}"></a>
             </td>
@@ -31,6 +34,9 @@
             </td>
             <td>
                 <p th:text="${employee.username}"></p>
+            </td>
+            <td th:each="contract : ${employee.contracts}">
+                <p th:text="${contract.id}"></p>
             </td>
         </tr>
     </table>
