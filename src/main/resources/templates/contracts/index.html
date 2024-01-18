@@ -22,7 +22,10 @@
             <td>Contact</td>
             <td>Employee</td>
         </tr>
-        <tr th:each="contract : ${contracts}">
+        <tr th:each="contract : ${contracts}"
+            th:if="${contract.customer.equals(user)} or
+            ${contract.employee.equals(user)} or
+            ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
             <td>
                 <a th:href="@{'/contracts/view/' + ${contract.id}}" th:text="${contract.id}"></a>
             </td>
