@@ -29,6 +29,9 @@ public class Customer extends AbstractUser implements UserDetails {
         return List.of(() -> "read");
     }
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Contract> contracts;
+
     public Customer() {
 
     }
@@ -54,9 +57,7 @@ public class Customer extends AbstractUser implements UserDetails {
         this.customerRoles = customerRoles;
     }
 
-    public List<Contract> getContracts() {
-        return contracts;
-    }
+
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
