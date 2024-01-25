@@ -15,12 +15,14 @@
 
     <table>
         <tr>
+            <td>ID</td>
             <td>Name</td>
             <td>Address</td>
             <td>Job Description</td>
             <td>Customer</td>
             <td>Contact</td>
             <td>Employee</td>
+            <td>Contact</td>
         </tr>
         <tr th:each="contract : ${contracts}"
             th:if="${contract.customer.equals(user)} or
@@ -43,15 +45,14 @@
                     No Customer Assigned!
                 </p>
             </td>
-            <td>
-                <p th:if="${contract.customer != null}" th:text="${contract.customer.username}">
-                    No Customer Assigned!
-                </p>
+            <td th:if="${contract.customer != null}">
+                <a th:href="@{'/customers/view/' + ${contract.customer.id}}" th:text="${contract.customer.username}"></a>
             </td>
-            <td>
-                <p th:if="${contract.employee != null}" th:text="${contract.employee.firstName}">
-                    No Employee Assigned!
-                </p>
+            <td th:if="${contract.employee != null}">
+                <p th:text="${contract.employee.firstName}"></p>
+            </td>
+            <td th:if="${contract.employee != null}">
+                <a th:href="@{'/employees/view/' + ${contract.employee.id}}" th:text="${contract.employee.username}"></a>
             </td>
         </tr>
     </table>

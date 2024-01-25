@@ -82,7 +82,7 @@ public class CustomerController {
             userDetailsService.loadUserByUsername(newCustomer.getUsername());
         }   catch (Exception UsernameNotFoundException) {
             userDetailsService.createCustomer(newCustomer);
-            return "redirect:/login";
+            return "redirect:/customers/";
         }
         return "register";
     }
@@ -96,7 +96,7 @@ public class CustomerController {
     @PostMapping("delete")
     public String processDeleteCustomerForm(@ModelAttribute @Valid Customer deleteCustomer) {
         customerRepository.deleteById(deleteCustomer.getId());
-        return "redirect:";
+        return "redirect:/customers/";
     }
 
     @GetMapping("view/{id}")
@@ -123,6 +123,7 @@ public class CustomerController {
         }
     }
 
+
     @PostMapping(
             value = "view/{id}/update",
             // In order to export to database when encrypted, the data has to be changed to a specific type.
@@ -134,6 +135,7 @@ public class CustomerController {
             return "view/"+ id + "/update";
         }
         else {
+            customer.setPassword(passwordEncoder.encode(customer.getPassword()));
             customerRepository.save(customer);
         }
         return "redirect:/customers/view/" + id;

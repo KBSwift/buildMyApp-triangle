@@ -143,6 +143,7 @@ public class EmployeeController {
             return "view/"+ id + "/update";
         }
         else {
+            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
             employeeRepository.save(employee);
         }
         return "redirect:/employees/view/" + id;

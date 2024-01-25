@@ -29,7 +29,7 @@
             </label>
         </div>
         <div>
-            <label> Customer :
+            <label> Employee :
                 <select name="employee">
                     <option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.username}"></option>
                 </select>

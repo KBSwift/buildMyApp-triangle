@@ -101,7 +101,6 @@ public class SetupDataLoader implements
     @Transactional
     Role createRoleIfNotFound(
             String name, Collection<Privilege> privileges) {
-
         Role role = roleRepository.findByName(name);
         if (role == null) {
             role = new Role(name);
