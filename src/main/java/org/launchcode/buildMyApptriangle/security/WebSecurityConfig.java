@@ -71,7 +71,7 @@ public class WebSecurityConfig {
     @Order(2)
     public SecurityFilterChain adminAuthenticationChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/contracts/add", "/contracts/delete", "/contracts/view/{id}/update", "/customers/add", "/customers/delete", "/customers/view/{id}/update", "/employees/add", "/employees/delete", "/employees/view/{id}/update")
+                .securityMatcher("/contracts/add", "/contracts/delete", "/contracts/view/{id}/**", "/customers/add", "/customers/delete", "/customers/view/{id}/**", "/employees/add", "/employees/delete", "/employees/view/{id}/**")
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/**").hasRole("ADMIN")
                 )
