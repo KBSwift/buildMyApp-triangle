@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Form Sent</title>
+</head>
+<body>
+    <span>E-mail:</span><span th:text="${emailForm.email}"></span><br/>
+    <span>Subject</span><span th:text="${emailForm.subject"}></span>
+    <span>Note:</span><span th:text="${emailForm.body}"></span><br/>
+
+</body>
+</html>

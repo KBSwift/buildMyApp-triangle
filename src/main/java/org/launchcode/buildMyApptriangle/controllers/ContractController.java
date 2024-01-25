@@ -1,3 +1,4 @@
+
 package org.launchcode.buildMyApptriangle.controllers;
 
 import jakarta.validation.Valid;
@@ -120,3 +121,4 @@ public class ContractController {
         return "redirect:/contracts/view/" + id;
     }
 }
+

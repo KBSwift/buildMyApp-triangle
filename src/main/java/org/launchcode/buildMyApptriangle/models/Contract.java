@@ -1,3 +1,4 @@
+
 package org.launchcode.buildMyApptriangle.models;
 
 import jakarta.persistence.*;
@@ -95,3 +96,4 @@ public class Contract{
         this.employee = employee;
     }
 }
+
