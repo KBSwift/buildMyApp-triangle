@@ -123,6 +123,7 @@ public class CustomerController {
         }
     }
 
+
     @PostMapping(
             value = "view/{id}/update",
             // In order to export to database when encrypted, the data has to be changed to a specific type.
