@@ -134,6 +134,7 @@ public class CustomerController {
             return "view/"+ id + "/update";
         }
         else {
+            customer.setPassword(passwordEncoder.encode(customer.getPassword()));
             customerRepository.save(customer);
         }
         return "redirect:/customers/view/" + id;
