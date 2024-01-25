@@ -23,13 +23,14 @@ public class Customer extends AbstractUser implements UserDetails {
                     name= "role_id", referencedColumnName = "id"))
     private Collection<Role> customerRoles;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Contract> contracts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(() -> "read");
     }
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Contract> contracts;
 
     public Customer() {
 
@@ -56,9 +57,7 @@ public class Customer extends AbstractUser implements UserDetails {
         this.customerRoles = customerRoles;
     }
 
-    public List<Contract> getContracts() {
-        return contracts;
-    }
+
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
